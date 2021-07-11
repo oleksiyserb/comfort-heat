@@ -1,5 +1,6 @@
 <?php
 
+use app\models\Subcategory;
 use yii\helpers\Html;
 use yii\grid\GridView;
 
@@ -24,7 +25,12 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
-            'category_id',
+            [
+                'attribute' => 'Категорії',
+                'value' => function (Subcategory $subcategory) {
+                    return $subcategory->category->title;
+                }
+            ],
             'title',
 
             ['class' => 'yii\grid\ActionColumn'],

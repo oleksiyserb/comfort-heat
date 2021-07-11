@@ -2,9 +2,13 @@
 
 namespace app\modules\admin\controllers;
 
+use app\models\Category;
+use app\models\forms\subcategory\AddSubcategoryForm;
+use app\models\forms\subcategory\UpdateSubcategoryForm;
 use Yii;
 use app\models\Subcategory;
 use yii\data\ActiveDataProvider;
+use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -52,8 +56,10 @@ class SubcategoryController extends Controller
      */
     public function actionView($id)
     {
+        $model = $this->findModel($id);
+
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $model,
         ]);
     }
 
@@ -64,14 +70,18 @@ class SubcategoryController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Subcategory();
+        $model = new AddSubcategoryForm();
+        $categories = Category::find()->all();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        $categoryArray = ArrayHelper::map($categories, 'id', 'title');
+
+        if ($model->load(Yii::$app->request->post()) && $id = $model->save()) {
+            return $this->redirect(['view', 'id' => $id]);
         }
 
         return $this->render('create', [
             'model' => $model,
+            'categoryArray' => $categoryArray,
         ]);
     }
 
@@ -84,7 +94,12 @@ class SubcategoryController extends Controller
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
+        $model = new UpdateSubcategoryForm();
+        $subcategoryCurrent = Subcategory::findOne($id);
+        $model->id = $id;
+
+        $categories = Category::find()->all();
+        $categoryArray = ArrayHelper::map($categories, 'id', 'title');
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -92,6 +107,8 @@ class SubcategoryController extends Controller
 
         return $this->render('update', [
             'model' => $model,
+            'subcategoryCurrent' => $subcategoryCurrent,
+            'categoryArray' => $categoryArray
         ]);
     }
 

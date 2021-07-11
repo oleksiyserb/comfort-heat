@@ -1,5 +1,6 @@
 <?php
 
+use app\models\Subcategory;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
@@ -30,7 +31,12 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            'category_id',
+            [
+                'attribute' => 'Категорії',
+                'value' => function (Subcategory $subcategory) {
+                    return $subcategory->category->title;
+                }
+            ],
             'title',
         ],
     ]) ?>

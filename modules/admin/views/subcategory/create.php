@@ -4,6 +4,7 @@ use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Subcategory */
+/* @var $categoryArray app\models\Category */
 
 $this->title = 'Create Subcategory';
 $this->params['breadcrumbs'][] = ['label' => 'Subcategories', 'url' => ['index']];
@@ -15,6 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= $this->render('_form', [
         'model' => $model,
+        'categoryArray' => $categoryArray,
     ]) ?>
 
 </div>

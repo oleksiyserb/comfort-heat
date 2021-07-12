@@ -5,7 +5,7 @@ use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Subcategory */
-/* @var $subcategoryCurrent \app\models\Subcategory */
+/* @var $categoryArray \app\models\Subcategory */
 
 $this->title = 'Update Subcategory: ' . $subcategoryCurrent->title;
 $this->params['breadcrumbs'][] = ['label' => 'Subcategories', 'url' => ['index']];

@@ -1,5 +1,6 @@
 <?php
 
+use app\models\Product;
 use yii\helpers\Html;
 use yii\grid\GridView;
 
@@ -25,14 +26,36 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'id',
             'title',
-            'price',
-            //'model',
-            //'maker',
-            //'description:ntext',
-            //'characteristic:ntext',
-            'picture',
-            'subcategory_id',
-            'status',
+            [
+                'attribute' => 'price',
+                'value' => function (Product $model) {
+                    return $model->price . ' ₴';
+                }
+            ],
+            [
+                'attribute' => 'time_create',
+                'value' => function (Product $model) {
+                    return  ($model->time_create) ? \app\components\DateHelper::getDate($model->time_create) .' в ' . \app\components\DateHelper::getTime($model->time_create) : 'Немає';
+                }
+            ],
+            [
+                'attribute' => 'time_update',
+                'value' => function (Product $model) {
+                    return ($model->time_update) ? \app\components\DateHelper::getDate($model->time_update) .' в ' . \app\components\DateHelper::getTime($model->time_update) : 'Не оновлювався';
+                }
+            ],
+            [
+                'attribute' => 'subcategory_id',
+                'value' => function (Product $model) {
+                    return $model->subcategory->title;
+                }
+            ],
+            [
+                'attribute' => 'status',
+                'value' => function (Product $model) {
+                    return $model->getStatus();
+                }
+            ],
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

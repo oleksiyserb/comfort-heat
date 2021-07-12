@@ -1,11 +1,13 @@
 <?php
 
+use app\models\Product;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Product */
 /* @var $form yii\widgets\ActiveForm */
+/* @var $subcategories app\models\Product */
 ?>
 
 <div class="product-form">
@@ -24,11 +26,12 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'characteristic')->textarea(['rows' => 6]) ?>
 
-    <?= $form->field($model, 'picture')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'subcategoryId')->dropDownList((array) $subcategories) ?>
 
-    <?= $form->field($model, 'subcategory_id')->textInput() ?>
-
-    <?= $form->field($model, 'status')->textInput() ?>
+    <?= $form->field($model, 'status')->dropDownList([
+        Product::STATUS_VISIBLE => 'Видно на сайті',
+        Product::STATUS_UNVISIBLE => 'Не видно на сайті'
+    ]) ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

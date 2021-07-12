@@ -23,7 +23,8 @@ class m210711_100521_create_product_table extends Migration
             'maker' => $this->string(),
             'description' => $this->text(),
             'characteristic' => $this->text(),
-            'picture' => $this->string(),
+            'time_create' => $this->integer(),
+            'time_update' => $this->integer(),
             'subcategory_id' => $this->integer()->notNull(),
             'status' => $this->integer(10),
         ]);

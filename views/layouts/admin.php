@@ -42,6 +42,9 @@ AppAsset::register($this);
                 ['label' => 'Category', 'url' => ['/admin/category/index']],
                 ['label' => 'Subcategory', 'url' => ['/admin/subcategory/index']],
                 ['label' => 'Product', 'url' => ['/admin/product/index']],
+                ['label' => 'Picture', 'url' => ['/admin/picture/index']],
+                ['label' => 'News', 'url' => ['/admin/news/index']],
+                ['label' => 'Project', 'url' => ['/admin/project/index']],
             ],
         ]);
         NavBar::end();

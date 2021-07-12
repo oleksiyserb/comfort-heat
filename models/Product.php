@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "product".
@@ -22,45 +23,14 @@ use Yii;
  */
 class Product extends \yii\db\ActiveRecord
 {
+    const STATUS_VISIBLE = 1;
+    const STATUS_UNVISIBLE = 2;
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
         return 'product';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function rules()
-    {
-        return [
-            [['price', 'subcategory_id', 'status'], 'integer'],
-            [['description', 'characteristic'], 'string'],
-            [['subcategory_id'], 'required'],
-            [['title', 'model', 'maker', 'picture'], 'string', 'max' => 255],
-            [['subcategory_id'], 'exist', 'skipOnError' => true, 'targetClass' => Subcategory::className(), 'targetAttribute' => ['subcategory_id' => 'id']],
-        ];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function attributeLabels()
-    {
-        return [
-            'id' => 'ID',
-            'title' => 'Title',
-            'price' => 'Price',
-            'model' => 'Model',
-            'maker' => 'Maker',
-            'description' => 'Description',
-            'characteristic' => 'Characteristic',
-            'picture' => 'Picture',
-            'subcategory_id' => 'Subcategory ID',
-            'status' => 'Status',
-        ];
     }
 
     /**
@@ -71,5 +41,18 @@ class Product extends \yii\db\ActiveRecord
     public function getSubcategory()
     {
         return $this->hasOne(Subcategory::className(), ['id' => 'subcategory_id']);
+    }
+
+    /**
+     * @return array
+     */
+    public static function getSubcategoriesArray()
+    {
+         return ArrayHelper::map(Subcategory::find()->all(), 'id', 'title');
+    }
+
+    public function getStatus()
+    {
+        return ($this->status == '1') ? 'Видно на сайті'  : 'Не видно на сайті';
     }
 }

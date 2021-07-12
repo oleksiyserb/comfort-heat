@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use app\models\Product;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Product */
@@ -17,6 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Upload Picture', ['upload-picture', 'id' => $model->id], ['class' => 'btn btn-info']) ?>
         <?= Html::a('Delete', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
@@ -36,9 +38,25 @@ $this->params['breadcrumbs'][] = $this->title;
             'maker',
             'description:ntext',
             'characteristic:ntext',
-            'picture',
-            'subcategory_id',
-            'status',
+            [
+                'attribute' => 'time_create',
+                'value' => function ($time) {
+                    return \app\components\DateHelper::getDate($time->time_create);
+                }
+            ],
+            'time_update',
+            [
+                'attribute' => 'subcategoryId',
+                'value' => function (Product $product) {
+                    return $product->subcategory->title;
+                }
+            ],
+            [
+                'attribute' => 'status',
+                'value' => function (Product $model) {
+                    return $model->getStatus();
+                }
+            ],
         ],
     ]) ?>
 

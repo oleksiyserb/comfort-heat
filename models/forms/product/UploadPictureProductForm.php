@@ -26,7 +26,7 @@ class UploadPictureProductForm extends Model
     public function addImage($file)
     {
         $fileUpload = new Storage();
-        $fileUpload->folder = 'product/';
+        $fileUpload->folder = '/uploads/product/';
 
         $fileUpload->imageWidth = 900;
         $fileUpload->imageHeight = 700;
@@ -52,7 +52,7 @@ class UploadPictureProductForm extends Model
     public function addMini($file, $id)
     {
         $fileUpload = new Storage();
-        $fileUpload->folder = 'product/mini/';
+        $fileUpload->folder = '/product/mini/';
         $fileUpload->imageWidth = 200;
         $fileUpload->imageHeight = 200;
         $fileUpload->imageMethod = 'crop';

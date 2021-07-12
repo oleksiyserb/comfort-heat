@@ -59,4 +59,16 @@ class Picture extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Product::className(), ['id' => 'product_id']);
     }
+
+    public function getImage()
+    {
+        if ($this->picture) {
+            return $this->picture;
+        }
+    }
+
+    public function getMini()
+    {
+        return $this->mini;
+    }
 }

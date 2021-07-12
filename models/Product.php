@@ -44,6 +44,16 @@ class Product extends \yii\db\ActiveRecord
     }
 
     /**
+     * Gets query for [[Picture]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getPicture()
+    {
+        return $this->hasMany(Picture::className(), ['product_id' => 'id']);
+    }
+
+    /**
      * @return array
      */
     public static function getSubcategoriesArray()

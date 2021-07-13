@@ -7,6 +7,7 @@ use app\widgets\Alert;
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
+use yii\helpers\Url;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 
@@ -35,20 +36,40 @@ AppAsset::register($this);
                 'class' => 'navbar-inverse navbar-fixed-top',
             ],
         ]);
+        $menuItems = [
+            ['label' => 'Home', 'url' => ['/admin/default/index']],
+            ['label' => 'Category', 'url' => ['/admin/category/index']],
+            ['label' => 'Subcategory', 'url' => ['/admin/subcategory/index']],
+            ['label' => 'Product', 'url' => ['/admin/product/index']],
+            ['label' => 'Picture', 'url' => ['/admin/picture/index']],
+            ['label' => 'News', 'url' => ['/admin/news/index']],
+            ['label' => 'Project', 'url' => ['/admin/project/index']],
+        ];
+        $menuItems[] = '<li>'
+            . Html::beginForm(['/auth/logout'], 'post')
+            . Html::submitButton(
+                'Logout (' . Yii::$app->user->identity->name . ')',
+                ['class' => 'btn btn-link logout']
+            )
+            . Html::endForm()
+            . '</li>';
         echo Nav::widget([
             'options' => ['class' => 'navbar-nav navbar-right'],
-            'items' => [
-                ['label' => 'Home', 'url' => ['/admin/default/index']],
-                ['label' => 'Category', 'url' => ['/admin/category/index']],
-                ['label' => 'Subcategory', 'url' => ['/admin/subcategory/index']],
-                ['label' => 'Product', 'url' => ['/admin/product/index']],
-                ['label' => 'Picture', 'url' => ['/admin/picture/index']],
-                ['label' => 'News', 'url' => ['/admin/news/index']],
-                ['label' => 'Project', 'url' => ['/admin/project/index']],
-            ],
+            'items' => $menuItems,
         ]);
         NavBar::end();
         ?>
+        <?php if(Yii::$app->user->isGuest):?>
+            <li><a href="<?= Url::toRoute(['auth/login'])?>">Login</a></li>
+            <li><a href="<?= Url::toRoute(['auth/signup'])?>">Register</a></li>
+        <?php else: ?>
+            <?= Html::beginForm(['/auth/logout'], 'post')
+            . Html::submitButton(
+                'Logout (' . Yii::$app->user->identity->name . ')',
+                ['class' => 'btn btn-link logout', 'style'=>"padding-top:10px;"]
+            )
+            . Html::endForm() ?>
+        <?php endif;?>
 
         <div class="container">
             <?= Breadcrumbs::widget([

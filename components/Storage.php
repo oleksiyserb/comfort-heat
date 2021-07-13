@@ -61,7 +61,7 @@ class Storage
 
     public static function clean($fileName)
     {
-        $path = '/files/uploads/';
+        $path = '/uploads/';
         $currentFile = $path . $fileName;
         $existsFile = $_SERVER['DOCUMENT_ROOT'] . $currentFile;
         if (file_exists($existsFile)) {

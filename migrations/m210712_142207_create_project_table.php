@@ -17,6 +17,8 @@ class m210712_142207_create_project_table extends Migration
             'title' => $this->string()->notNull(),
             'picture' => $this->string(),
             'text' => $this->text(),
+            'time_create' => $this->integer(),
+            'time_update' => $this->integer(),
         ]);
     }
 

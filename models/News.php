@@ -23,29 +23,12 @@ class News extends \yii\db\ActiveRecord
         return 'news';
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function rules()
+    public function getImage()
     {
-        return [
-            [['title'], 'required'],
-            [['text'], 'string'],
-            [['title', 'description', 'picture'], 'string', 'max' => 255],
-        ];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function attributeLabels()
-    {
-        return [
-            'id' => 'ID',
-            'title' => 'Title',
-            'description' => 'Description',
-            'picture' => 'Picture',
-            'text' => 'Text',
-        ];
+        if ($this->picture) {
+            return Yii::$app->params['storage'] . $this->picture;
+        } else {
+            return '/no-image.png';
+        }
     }
 }

@@ -40,11 +40,16 @@ $this->params['breadcrumbs'][] = $this->title;
             'characteristic:ntext',
             [
                 'attribute' => 'time_create',
-                'value' => function ($time) {
-                    return \app\components\DateHelper::getDate($time->time_create);
+                'value' => function (Product $model) {
+                    return  ($model->time_create) ? \app\components\DateHelper::getDate($model->time_create) .' в ' . \app\components\DateHelper::getTime($model->time_create) : 'Немає';
                 }
             ],
-            'time_update',
+            [
+                'attribute' => 'time_update',
+                'value' => function (Product $model) {
+                    return ($model->time_update) ? \app\components\DateHelper::getDate($model->time_update) .' в ' . \app\components\DateHelper::getTime($model->time_update) : 'Не оновлювався';
+                }
+            ],
             [
                 'attribute' => 'subcategoryId',
                 'value' => function (Product $product) {

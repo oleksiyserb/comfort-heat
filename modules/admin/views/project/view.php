@@ -17,6 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Upload Picture', ['upload-picture', 'id' => $model->id], ['class' => 'btn btn-info']) ?>
         <?= Html::a('Delete', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
@@ -31,8 +32,26 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'id',
             'title',
-            'picture',
+            [
+                'attribute' => 'picture',
+                'format' => 'raw',
+                'value' => function (\app\models\Project $model) {
+                    return Html::img($model->getImage(), ['width' => '300px']);
+                }
+            ],
             'text:ntext',
+            [
+                'attribute' => 'time_create',
+                'value' => function (\app\models\Project $model) {
+                    return  ($model->time_create) ? \app\components\DateHelper::getDate($model->time_create) .' в ' . \app\components\DateHelper::getTime($model->time_create) : 'Немає';
+                }
+            ],
+            [
+                'attribute' => 'time_update',
+                'value' => function (\app\models\Project $model) {
+                    return ($model->time_update) ? \app\components\DateHelper::getDate($model->time_update) .' в ' . \app\components\DateHelper::getTime($model->time_update) : 'Не оновлювався';
+                }
+            ],
         ],
     ]) ?>
 

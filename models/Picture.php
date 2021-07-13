@@ -60,15 +60,15 @@ class Picture extends \yii\db\ActiveRecord
         return $this->hasOne(Product::className(), ['id' => 'product_id']);
     }
 
-    public function getImage()
-    {
-        if ($this->picture) {
-            return $this->picture;
-        }
-    }
-
+    /**
+     * @return string
+     */
     public function getMini()
     {
-        return $this->mini;
+        if ($this->mini) {
+            return Yii::$app->params['storage'] . $this->mini;
+        } else {
+            return '/no-image.png';
+        }
     }
 }

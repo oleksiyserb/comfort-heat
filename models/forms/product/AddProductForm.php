@@ -46,7 +46,6 @@ class AddProductForm extends Model
             [['price', 'subcategoryId', 'status', 'time_create'], 'integer'],
             [['title', 'model', 'maker'], 'string', 'max' => 255],
             [['description', 'characteristic'], 'string'],
-            [['subcategoryId'], 'exist', 'skipOnError' => true, 'targetClass' => Product::className(), 'targetAttribute' => ['subcategoryId' => 'id']],
         ];
     }
 

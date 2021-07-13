@@ -23,6 +23,9 @@ class News extends \yii\db\ActiveRecord
         return 'news';
     }
 
+    /**
+     * @return string
+     */
     public function getImage()
     {
         if ($this->picture) {

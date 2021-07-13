@@ -7,6 +7,7 @@ use app\models\forms\product\AddProductForm;
 use app\models\forms\product\PictureForm;
 use app\models\forms\product\UpdateProductForm;
 use app\models\forms\product\UploadPictureProductForm;
+use app\models\Picture;
 use Yii;
 use app\models\Product;
 use yii\data\ActiveDataProvider;
@@ -130,14 +131,13 @@ class ProductController extends Controller
     public function actionUploadPicture($id)
     {
         $model = new UploadPictureProductForm();
-
         $model->productId = $id;
 
         if($model->load(Yii::$app->request->post())) {
             $image = UploadedFile::getInstance($model, 'image');
             if (is_uploaded_file($image->tempName)) {
-                if ($model->addImage($image)) {
-                    return $this->redirect(['view', 'id' => $id]);
+                if ($id = $model->addImage($image)) {
+                    return $this->redirect(['picture/view', 'id' => $id]);
                 }
             }
         }

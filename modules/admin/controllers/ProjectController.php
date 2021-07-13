@@ -2,12 +2,16 @@
 
 namespace app\modules\admin\controllers;
 
+use app\models\forms\project\AddProjectForm;
+use app\models\forms\project\ProjectImageForm;
+use app\models\forms\project\UpdateProjectForm;
 use Yii;
 use app\models\project;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * ProjectController implements the CRUD actions for project model.
@@ -64,10 +68,10 @@ class ProjectController extends Controller
      */
     public function actionCreate()
     {
-        $model = new project();
+        $model = new AddProjectForm();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post()) && $id = $model->save()) {
+            return $this->redirect(['view', 'id' => $id]);
         }
 
         return $this->render('create', [
@@ -84,13 +88,36 @@ class ProjectController extends Controller
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
+        $model = new UpdateProjectForm();
+        $currentProject = $this->findModel($id);
+        $model->id = $id;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('update', [
+            'model' => $model,
+            'currentProject' => $currentProject
+        ]);
+    }
+
+    public function actionUploadPicture($id)
+    {
+        $model = new ProjectImageForm();
+
+        $model->projectId = $id;
+
+        if($model->load(Yii::$app->request->post())) {
+            $image = UploadedFile::getInstance($model, 'image');
+            if (is_uploaded_file($image->tempName)) {
+                if ($model->addImage($image)) {
+                    return $this->redirect(['view', 'id' => $id]);
+                }
+            }
+        }
+
+        return $this->render('image', [
             'model' => $model,
         ]);
     }

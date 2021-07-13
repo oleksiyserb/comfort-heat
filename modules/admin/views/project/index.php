@@ -25,9 +25,26 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'id',
             'title',
-            'picture',
+            [
+                'attribute' => 'picture',
+                'format' => 'raw',
+                'value' => function (\app\models\Project $model) {
+                    return Html::img($model->getImage(), ['width' => '300px']);
+                }
+            ],
             'text:ntext',
-
+            [
+                'attribute' => 'time_create',
+                'value' => function (\app\models\Project $model) {
+                    return  ($model->time_create) ? \app\components\DateHelper::getDate($model->time_create) .' в ' . \app\components\DateHelper::getTime($model->time_create) : 'Немає';
+                }
+            ],
+            [
+                'attribute' => 'time_update',
+                'value' => function (\app\models\Project $model) {
+                    return ($model->time_update) ? \app\components\DateHelper::getDate($model->time_update) .' в ' . \app\components\DateHelper::getTime($model->time_update) : 'Не оновлювався';
+                }
+            ],
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>

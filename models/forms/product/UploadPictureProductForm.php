@@ -26,7 +26,7 @@ class UploadPictureProductForm extends Model
     public function addImage($file)
     {
         $fileUpload = new Storage();
-        $fileUpload->folder = '/uploads/product/';
+        $fileUpload->folder = 'product/';
 
         $fileUpload->imageWidth = 900;
         $fileUpload->imageHeight = 700;
@@ -43,7 +43,7 @@ class UploadPictureProductForm extends Model
             if ($image->save()) {
                 $id = Yii::$app->db->getLastInsertID();
                 if ($this->addMini($file, $id)) {
-                    return true;
+                    return $id;
                 }
             }
         }
@@ -52,7 +52,7 @@ class UploadPictureProductForm extends Model
     public function addMini($file, $id)
     {
         $fileUpload = new Storage();
-        $fileUpload->folder = '/product/mini/';
+        $fileUpload->folder = 'product/mini/';
         $fileUpload->imageWidth = 200;
         $fileUpload->imageHeight = 200;
         $fileUpload->imageMethod = 'crop';

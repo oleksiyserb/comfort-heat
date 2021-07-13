@@ -36,13 +36,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 }
             ],
             [
-                'attribute' => 'picture',
-                'format' => 'raw',
-                'value' => function (\app\models\Picture $model) {
-                    return Html::img($model->getImage(), ['width' => '200px']);
-                }
-            ],
-            [
                 'attribute' => 'mini',
                 'format' => 'raw',
                 'value' => function (\app\models\Picture $model) {

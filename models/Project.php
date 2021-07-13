@@ -23,27 +23,14 @@ class Project extends \yii\db\ActiveRecord
     }
 
     /**
-     * {@inheritdoc}
+     * @return string
      */
-    public function rules()
+    public function getImage()
     {
-        return [
-            [['title'], 'required'],
-            [['text'], 'string'],
-            [['title', 'picture'], 'string', 'max' => 255],
-        ];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function attributeLabels()
-    {
-        return [
-            'id' => 'ID',
-            'title' => 'Title',
-            'picture' => 'Picture',
-            'text' => 'Text',
-        ];
+        if ($this->picture) {
+            return Yii::$app->params['storage'] . $this->picture;
+        } else {
+            return '/no-image.png';
+        }
     }
 }

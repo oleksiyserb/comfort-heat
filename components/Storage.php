@@ -70,4 +70,16 @@ class Storage
         return true;
     }
 
+    /**
+     * @param $picture
+     * @return string
+     */
+    public static function getPicture($picture)
+    {
+        if ($picture) {
+            return Yii::$app->params['storage'] . $picture;
+        } else {
+            return '/no-image.png';
+        }
+    }
 }

@@ -262,7 +262,7 @@ PublicAsset::register($this);
             <p>Досвід Comfort Heat та високі стандарти компанії є міцною основою в реалізації проектів будь-якої
                 складності.</p>
             <div class="info__button partner__block-info margin--left">
-                <a href="projects.html">Більше проектів<img src="./public/image/arrow-down-light.svg" alt="arrow"></a>
+                <a href="projects.html">Більше проектів<img src="/public/image/arrow-down-light.svg" alt="arrow"></a>
             </div>
         </div>
     </div>
@@ -274,22 +274,22 @@ PublicAsset::register($this);
         <div class="footer__body">
             <div class="container">
                 <div class="footer__logo">
-                    <a href="/"><img src="./public/image/white-logo.svg" alt="white-logo"></a>
+                    <a href="/"><img src="/public/image/white-logo.svg" alt="white-logo"></a>
                 </div>
                 <div class="footer__contacts">
                     <h3>Контакти</h3>
                     <p>м. Київ, вул. В. Хвойки, 10, оф. 3</p>
                     <ul class="footer__operators">
                         <li>
-                            <a href="tel:+380997246400"><img src="./public/image/kyivstar.svg" alt="kyivstar">+38 099 724 64
+                            <a href="tel:+380997246400"><img src="/public/image/kyivstar.svg" alt="kyivstar">+38 099 724 64
                                 00</a>
                         </li>
                         <li>
-                            <a href="tel:+380967246400"><img src="./public/image/vodafone.svg" alt="vodafone">+38 096 724 64
+                            <a href="tel:+380967246400"><img src="/public/image/vodafone.svg" alt="vodafone">+38 096 724 64
                                 00</a>
                         </li>
                         <li>
-                            <a href="tel:+380937246400"><img src="./public/image/lifecell.svg" alt="lifecell">+38 093 724 64
+                            <a href="tel:+380937246400"><img src="/public/image/lifecell.svg" alt="lifecell">+38 093 724 64
                                 00</a>
                         </li>
                     </ul>

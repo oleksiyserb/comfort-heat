@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\data\Pagination;
 
 /**
  * This is the model class for table "project".
@@ -14,6 +15,9 @@ use Yii;
  */
 class Project extends \yii\db\ActiveRecord
 {
+    const SHOW_LIMIT_PROJECT = 8;
+    const STATUS_SEE = 1;
+    const LIMIT_PROPOSITION_PROJECTS = 2;
     /**
      * {@inheritdoc}
      */
@@ -32,5 +36,26 @@ class Project extends \yii\db\ActiveRecord
         } else {
             return '/no-image.png';
         }
+    }
+
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public static function getPojects()
+    {
+        $query = Project::find()
+            ->where(['status' => self::STATUS_SEE]);
+        $countProjects = $query->count();
+        $pages = new Pagination(['totalCount' => $countProjects, 'pageSize' => self::SHOW_LIMIT_PROJECT]);
+
+        $projects = $query->offset($pages->offset)
+            ->limit($pages->limit)
+            ->all();
+
+        $data['projects'] = $projects;
+        $data['pages'] = $pages;
+
+        return $data;
     }
 }

@@ -1,4 +1,12 @@
-<!-- Hero /public/image -->
+<?php
+/* @var $projects app\models\Project */
+/* @var $model app\models\Project */
+
+use app\components\StringHelper;
+use app\components\Storage;
+use yii\helpers\Url;
+?>
+<!-- Hero -->
 <section class="hero">
     <div class="container">
         <div class="hero__title">
@@ -39,34 +47,21 @@
     <div class="container">
         <h1 class="title">Проєкти</h1>
         <div class="info project__wrapper">
-            <div class="info__item">
-                <h3>Новое административное здание АО SEB bankas ул. Р.Баравико, Вильнюс, 2020, Литва</h3>
+
+            <?php foreach ($projects as $project): ?>
+            <div class="info__item <?php if ($project->picture) { echo 'project__picture'; } ?>">
+                <h3><?= StringHelper::getTitle($project->title); ?></h3>
+                <?php if ($project->picture): ?>
+                <img src="<?= Storage::getPicture($project->picture); ?>" alt="hotel">
+                <?php endif; ?>
                 <div class="info__button project__details">
-                    <a href="one-project.html">Детальніше<img src="/public/image/arrow-down.svg" alt="arrow"></a>
+                    <a href="<?= Url::to(['project/view', 'id' => $project->id]) ?>">Детальніше<img src="/public/image/arrow-down.svg" alt="arrow"></a>
                 </div>
             </div>
-            <div class="info__item project__picture">
-                <img src="/public/image/hotel.png" alt="hotel">
-                <h3>Отель „Hilton Garden Inn“, Вильнюс, 2019</h3>
-                <div class="info__button project__details">
-                    <a href="one-project.html">Детальніше<img src="/public/image/arrow-down.svg" alt="arrow"></a>
-                </div>
-            </div>
-            <div class="info__item">
-                <h3>Snow Arena, Друскининкай, Литва, 2011</h3>
-                <div class="info__button project__details">
-                    <a href="one-project.html">Детальніше<img src="/public/image/arrow-down.svg" alt="arrow"></a>
-                </div>
-            </div>
-            <div class="info__item">
-                <h3>Завод Oреон Глобал ПЭТ, Клайпеда, Литва, 2014</h3>
-                <div class="info__button project__details">
-                    <a href="one-project.html">Детальніше<img src="/public/image/arrow-down.svg" alt="arrow"></a>
-                </div>
-            </div>
+            <?php endforeach; ?>
         </div>
         <div class="info__button project__info margin--left">
-            <a href="projects.html">Більше проектів<img src="/public/image/arrow-down.svg" alt="arrow"></a>
+            <a href="<?= Url::to(['project/index']) ?>">Більше проектів<img src="/public/image/arrow-down.svg" alt="arrow"></a>
         </div>
     </div>
 </section>

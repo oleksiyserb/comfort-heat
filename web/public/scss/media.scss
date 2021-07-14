@@ -573,6 +573,15 @@
 
 // ---------------------------------------Article------------------------------------------------------------------
 
+@media (min-width: 768px) {
+	.article__image {
+		> img {
+			object-fit: cover;
+			height: 500px;
+		}
+	}
+}
+
 @media (min-width: 1024px) {
 	.news {
 		padding-bottom: 0;

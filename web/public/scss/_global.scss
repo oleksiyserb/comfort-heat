@@ -95,27 +95,38 @@ h4 {
 .pagination {
 	margin: 2.5em auto 0;
 	display: flex;
-	justify-content: center;
-	&__block {
+	border: 1px solid $blue-light;
+	border-radius: 20px;
+	&__wrap {
 		display: flex;
-		border: 1px solid $blue-light;
+		justify-content: center;
+	}
+	> li {
+		display: flex;
 		border-radius: 20px;
 		padding: .3125em 0;
-		> a {
-			color: $black-light;
-			margin: 0 .3125em;
-			padding: .3125em .625em;
-			border-radius: 50%;
-			font-weight: 600;
-			&:not(.pagination__active):hover {
+		align-items: center;
+		span {
+			padding: 0 .5em;
+			display: block;
+		}
+		&:not(.active):hover {
+			> a {
 				color: $blue;
 				box-shadow: 0px 1px 2px rgba(0, 122, 201, 0.1), 0px 2px 4px rgba(0, 122, 201, 0.1);
 			}
 		}
+		> a {
+			color: $black-light;
+			margin: 0 .3125em;
+			padding: .3125em .75em;
+			border-radius: 50%;
+			font-weight: 600;
+		}
 	}
 }
 
-a.pagination__active {
+li.active > a {
 	background-color: $blue;
 	color: $white;
 }
@@ -125,15 +136,10 @@ a.pagination__active {
 	margin: 2.5rem 0;
 }
 
-.breadcrumbs {
+.breadcrumb {
 	display: inline-block;
-	align-items: center;
-	margin: 2.5em 0;
-	a {
+	margin: 2.5em 0 0;
+	> li {
 		display: inherit;
-	}
-	p {
-		display: inherit;
-		margin: 0;
 	}
 }

@@ -565,6 +565,13 @@
             transform: scale(1.4);
   }
 }
+@media (min-width: 768px) {
+  .article__image > img {
+    -o-object-fit: cover;
+       object-fit: cover;
+    height: 500px;
+  }
+}
 @media (min-width: 1024px) {
   .news {
     padding-bottom: 0;

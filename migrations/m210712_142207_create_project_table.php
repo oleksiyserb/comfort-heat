@@ -19,6 +19,7 @@ class m210712_142207_create_project_table extends Migration
             'text' => $this->text(),
             'time_create' => $this->integer(),
             'time_update' => $this->integer(),
+            'status' => $this->integer(10)->defaultValue(1),
         ]);
     }
 

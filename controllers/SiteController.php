@@ -6,10 +6,7 @@ use app\models\Project;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
-use yii\web\Response;
 use yii\filters\VerbFilter;
-use app\models\LoginForm;
-use app\models\ContactForm;
 
 class SiteController extends Controller
 {
@@ -68,6 +65,36 @@ class SiteController extends Controller
         return $this->render('index', [
             'projects' => $projects,
         ]);
+    }
+
+    /**
+     * Displays services page.
+     *
+     * @return string
+     */
+    public function actionServices()
+    {
+        return $this->render('services');
+    }
+
+    /**
+     * Displays technical page.
+     *
+     * @return string
+     */
+    public function actionTechnical()
+    {
+        return $this->render('technical');
+    }
+
+    /**
+     * Displays design page.
+     *
+     * @return string
+     */
+    public function actionDesign()
+    {
+        return $this->render('design');
     }
 
     /**

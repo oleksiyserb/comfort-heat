@@ -139,11 +139,21 @@ PublicAsset::register($this);
                         <input id="search" type="text">
                     </div>
                     <ul class="burger-menu__links">
-                        <li><a href="<?= Url::to(['news/index']) ?>">Новини</a></li>
-                        <li><a href="<?= Url::to(['site/services']) ?>">Сервіс та обслуговування</a></li>
-                        <li><a href="<?= Url::to(['site/technical']) ?>">Технічна інформація</a></li>
-                        <li><a href="<?= Url::to(['site/design']) ?>">Дизайнерам та архітекторам</a></li>
-                        <li><a href="<?= Url::to(['site/about']) ?>">Компанія</a></li>
+                        <li>
+                            <a <?php if (Yii::$app->controller->id == 'news') { echo 'class="active"'; } ?>  href="<?= Url::to(['news/index']) ?>">Новини</a>
+                        </li>
+                        <li>
+                            <a <?php if (Yii::$app->controller->action->id == 'services') { echo 'class="active"'; } ?> href="<?= Url::to(['site/services']) ?>">Сервіс та обслуговування</a>
+                        </li>
+                        <li>
+                            <a <?php if (Yii::$app->controller->action->id == 'technical') { echo 'class="active"'; } ?> href="<?= Url::to(['site/technical']) ?>">Технічна інформація</a>
+                        </li>
+                        <li>
+                            <a <?php if (Yii::$app->controller->action->id == 'design') { echo 'class="active"'; } ?> href="<?= Url::to(['site/design']) ?>">Дизайнерам та архітекторам</a>
+                        </li>
+                        <li>
+                            <a <?php if (Yii::$app->controller->action->id == 'about') { echo 'class="active"'; } ?> href="<?= Url::to(['site/about']) ?>">Компанія</a>
+                        </li>
                         <div class="burger-menu__social-media">
                             <a href="#"><img src="/public/image/facebook-menu.svg" alt="facebook"></a>
                             <a href="#"><img src="/public/image/instagram-menu.svg" alt="instagram"></a>

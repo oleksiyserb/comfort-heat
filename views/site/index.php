@@ -50,7 +50,7 @@ use yii\helpers\Url;
 
             <?php foreach ($projects as $project): ?>
             <div class="info__item <?php if ($project->picture) { echo 'project__picture'; } ?>">
-                <h3><?= StringHelper::getTitle($project->title); ?></h3>
+                <h3><?= StringHelper::getShortTitle($project->title); ?></h3>
                 <?php if ($project->picture): ?>
                 <img src="<?= Storage::getPicture($project->picture); ?>" alt="hotel">
                 <?php endif; ?>

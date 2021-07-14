@@ -5,6 +5,7 @@
 
 use yii\helpers\Html;
 use app\assets\PublicAsset;
+use yii\helpers\Url;
 
 PublicAsset::register($this);
 ?>
@@ -138,11 +139,11 @@ PublicAsset::register($this);
                         <input id="search" type="text">
                     </div>
                     <ul class="burger-menu__links">
-                        <li><a href="news.html">Новини</a></li>
-                        <li><a href="services.html">Сервіс та обслуговування</a></li>
-                        <li><a href="technical.html">Технічна інформація</a></li>
-                        <li><a href="design.html">Дизайнерам та архітекторам</a></li>
-                        <li><a href="company.html">Компанія</a></li>
+                        <li><a href="<?= Url::to(['news/index']) ?>">Новини</a></li>
+                        <li><a href="<?= Url::to(['site/services']) ?>">Сервіс та обслуговування</a></li>
+                        <li><a href="<?= Url::to(['site/technical']) ?>">Технічна інформація</a></li>
+                        <li><a href="<?= Url::to(['site/design']) ?>">Дизайнерам та архітекторам</a></li>
+                        <li><a href="<?= Url::to(['site/about']) ?>">Компанія</a></li>
                         <div class="burger-menu__social-media">
                             <a href="#"><img src="/public/image/facebook-menu.svg" alt="facebook"></a>
                             <a href="#"><img src="/public/image/instagram-menu.svg" alt="instagram"></a>
@@ -262,7 +263,7 @@ PublicAsset::register($this);
             <p>Досвід Comfort Heat та високі стандарти компанії є міцною основою в реалізації проектів будь-якої
                 складності.</p>
             <div class="info__button partner__block-info margin--left">
-                <a href="projects.html">Більше проектів<img src="/public/image/arrow-down-light.svg" alt="arrow"></a>
+                <a href="<?= Url::to(['project/index']) ?>">Більше проектів<img src="/public/image/arrow-down-light.svg" alt="arrow"></a>
             </div>
         </div>
     </div>
@@ -307,11 +308,11 @@ PublicAsset::register($this);
                     </div>
                 </div>
                 <div class="footer__menu">
-                    <a href="news.html">Новини</a>
-                    <a href="services.html">Сервіс та обслуговування</a>
-                    <a href="technical.html">Технічна інформація</a>
-                    <a href="design.html">Дизайнерам та архітекторам</a>
-                    <a href="company.html">Компанія</a>
+                    <a href="<?= Url::to(['news/index']) ?>">Новини</a>
+                    <a href="<?= Url::to(['site/services']) ?>">Сервіс та обслуговування</a>
+                    <a href="<?= Url::to(['site/technical']) ?>">Технічна інформація</a>
+                    <a href="<?= Url::to(['site/design']) ?>">Дизайнерам та архітекторам</a>
+                    <a href="<?= Url::to(['site/about']) ?>">Компанія</a>
                 </div>
             </div>
         </div>

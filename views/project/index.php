@@ -6,17 +6,19 @@ use app\components\StringHelper;
 use yii\helpers\Url;
 
 /* @var $pages \app\models\Project */
+
+$this->title = 'Наші проєкти';
 ?>
 
 <!-- Projects -->
 <section class="projects">
     <div class="container">
-        <h2 class="title">Наші проєкти</h2>
+        <h2 class="title"><?= $this->title; ?></h2>
         <div class="info">
 
             <?php foreach ($projects as $project): ?>
                 <div class="info__item <?php if ($project->picture) { echo 'project__picture'; } ?>">
-                    <h3><?= StringHelper::getTitle($project->title); ?></h3>
+                    <h3><?= StringHelper::getShortTitle($project->title); ?></h3>
                     <?php if ($project->picture): ?>
                         <img src="<?= Storage::getPicture($project->picture); ?>" alt="hotel">
                     <?php endif; ?>

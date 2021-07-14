@@ -6,10 +6,10 @@ namespace app\components;
 
 class StringHelper
 {
-    const LIMIT_TITLE = 80;
+    const LIMIT_TITLE = 60;
     const LIMIT_DESCRIPTION = 200;
 
-    public static function getDescription($string, $limit = self::LIMIT_DESCRIPTION)
+    public static function getShortDescription($string, $limit = self::LIMIT_DESCRIPTION)
     {
         if(strlen($string) > $limit) {
             return mb_substr($string, 0, $limit, 'UTF-8') . '...';
@@ -18,7 +18,7 @@ class StringHelper
         }
     }
 
-    public static function getTitle($string, $limit = self::LIMIT_TITLE)
+    public static function getShortTitle($string, $limit = self::LIMIT_TITLE)
     {
         if (strlen($string) > $limit) {
             return mb_substr($string, 0, $limit, 'UTF-8') . '...';

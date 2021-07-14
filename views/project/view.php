@@ -10,7 +10,7 @@ $this->title = 'Проєкт: ' . $project->title;
 
 $this->params['breadcrumbs'][] = [
     'template' => "<li><b>{link}</b></li> > ",
-    'label' => 'Projects',
+    'label' => 'Проєкти',
     'url' => ['index']
 ];
 

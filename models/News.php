@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\data\Pagination;
 
 /**
  * This is the model class for table "news".
@@ -15,6 +16,9 @@ use Yii;
  */
 class News extends \yii\db\ActiveRecord
 {
+    const STATUS_SEE = 1;
+    const SHOW_LIMIT_ARTICLES = 8;
+    const LIMIT_PROPOSITIONS = 2;
     /**
      * {@inheritdoc}
      */
@@ -33,5 +37,25 @@ class News extends \yii\db\ActiveRecord
         } else {
             return '/no-image.png';
         }
+    }
+
+    /**
+     * @return mixed
+     */
+    public static function getArticles()
+    {
+        $query = News::find()
+            ->where(['status' => self::STATUS_SEE]);
+        $countArticles = $query->count();
+        $pages = new Pagination(['totalCount' => $countArticles, 'pageSize' => self::SHOW_LIMIT_ARTICLES]);
+
+        $articles = $query->offset($pages->offset)
+            ->limit($pages->limit)
+            ->all();
+
+        $data['articles'] = $articles;
+        $data['pages'] = $pages;
+
+        return $data;
     }
 }

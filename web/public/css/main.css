@@ -213,6 +213,10 @@ h4 {
       -ms-flex-align: center;
           align-items: center;
 }
+.pagination > li.active > a {
+  background-color: #007AC9;
+  color: #FFF;
+}
 .pagination > li span {
   padding: 0 0.5em;
   display: block;
@@ -228,11 +232,6 @@ h4 {
   padding: 0.3125em 0.75em;
   border-radius: 50%;
   font-weight: 600;
-}
-
-li.active > a {
-  background-color: #007AC9;
-  color: #FFF;
 }
 
 .title {
@@ -1076,6 +1075,9 @@ li.active > a {
   border-radius: 4px;
   margin-top: 0.625em;
   width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  height: 200px;
 }
 .result__description > * {
   -webkit-transition: color 0.4s;

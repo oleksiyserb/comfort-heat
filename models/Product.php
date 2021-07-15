@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\data\Pagination;
 use yii\helpers\ArrayHelper;
 
 /**
@@ -25,6 +26,7 @@ class Product extends \yii\db\ActiveRecord
 {
     const STATUS_VISIBLE = 1;
     const STATUS_UNVISIBLE = 2;
+    const SHOW_LIMIT_PRODUCTS = 8;
     /**
      * {@inheritdoc}
      */
@@ -64,5 +66,23 @@ class Product extends \yii\db\ActiveRecord
     public function getStatus()
     {
         return ($this->status == '1') ? 'Видно на сайті'  : 'Не видно на сайті';
+    }
+
+    public static function getProducts()
+    {
+        $query = Product::find()
+            ->with('picture')
+            ->where(['status' => self::STATUS_VISIBLE]);
+        $countProducts = $query->count();
+        $pages = new Pagination(['totalCount' => $countProducts, 'pageSize' => self::SHOW_LIMIT_PRODUCTS]);
+
+        $products = $query->offset($pages->offset)
+            ->limit($pages->limit)
+            ->all();
+
+        $data['products'] = $products;
+        $data['pages'] = $pages;
+
+        return $data;
     }
 }

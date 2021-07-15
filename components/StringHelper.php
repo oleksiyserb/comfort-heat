@@ -6,8 +6,8 @@ namespace app\components;
 
 class StringHelper
 {
-    const LIMIT_TITLE = 60;
-    const LIMIT_DESCRIPTION = 200;
+    const LIMIT_TITLE = 50;
+    const LIMIT_DESCRIPTION = 150;
 
     public static function getShortDescription($string, $limit = self::LIMIT_DESCRIPTION)
     {

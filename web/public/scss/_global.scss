@@ -106,6 +106,10 @@ h4 {
 		border-radius: 20px;
 		padding: .3125em 0;
 		align-items: center;
+		&.active > a {
+			background-color: $blue;
+			color: $white;
+		}
 		span {
 			padding: 0 .5em;
 			display: block;
@@ -124,11 +128,6 @@ h4 {
 			font-weight: 600;
 		}
 	}
-}
-
-li.active > a {
-	background-color: $blue;
-	color: $white;
 }
 
 .title {

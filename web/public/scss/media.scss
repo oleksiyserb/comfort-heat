@@ -750,7 +750,6 @@
 						margin: 0;
 						display: block;
 						border-radius: 8px;
-						width: auto;
 					}
 					> .result__description {
 						margin: 0 1.25em;
@@ -781,6 +780,15 @@
 		&__product-card {
 			flex: 1 20%;
 			margin: 1.25em;
+		}
+		&.list {
+			margin: 0;
+			display: block;
+			> .result__product-card {
+				> img {
+					width: 200px;
+				}
+			}
 		}
 	}
 }

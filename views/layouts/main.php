@@ -45,7 +45,7 @@ $categories = Category::find()->with('subcategories')->all();
 
                     <?php foreach ($categories as $category): ?>
                     <ul class="catalog-modal__item">
-                        <a class="catalog-modal__first-button" href="#">
+                        <a class="catalog-modal__first-button" href="<?= Url::to(['catalog/category', 'id' => $category->id]) ?>">
                             <?= $category->title; ?><img src="/public/image/arrow-down-orange.svg" alt="arrow">
                         </a>
 

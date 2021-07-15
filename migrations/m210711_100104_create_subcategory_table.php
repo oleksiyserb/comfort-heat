@@ -19,6 +19,7 @@ class m210711_100104_create_subcategory_table extends Migration
             'id' => $this->primaryKey(),
             'category_id' => $this->integer()->notNull(),
             'title' => $this->string()->notNull(),
+            'text' => $this->text(),
         ]);
 
         // creates index for column `category_id`

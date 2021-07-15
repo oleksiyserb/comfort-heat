@@ -717,7 +717,6 @@
     margin: 0;
     display: block;
     border-radius: 8px;
-    width: auto;
   }
   .result__wrapper.list > .result__product-card > .result__description {
     margin: 0 1.25em;
@@ -744,6 +743,13 @@
         -ms-flex: 1 20%;
             flex: 1 20%;
     margin: 1.25em;
+  }
+  .result.list {
+    margin: 0;
+    display: block;
+  }
+  .result.list > .result__product-card > img {
+    width: 200px;
   }
 }
 @media (min-width: 1024px) {

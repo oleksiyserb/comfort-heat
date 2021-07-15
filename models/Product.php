@@ -63,11 +63,17 @@ class Product extends \yii\db\ActiveRecord
          return ArrayHelper::map(Subcategory::find()->all(), 'id', 'title');
     }
 
+    /**
+     * @return string
+     */
     public function getStatus()
     {
         return ($this->status == '1') ? 'Видно на сайті'  : 'Не видно на сайті';
     }
 
+    /**
+     * @return mixed
+     */
     public static function getProducts()
     {
         $query = Product::find()
@@ -81,6 +87,28 @@ class Product extends \yii\db\ActiveRecord
             ->all();
 
         $data['products'] = $products;
+        $data['pages'] = $pages;
+
+        return $data;
+    }
+
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public static function getSubcategoryProducts($id)
+    {
+        $query = Product::find()
+            ->where(['subcategory_id' => $id, 'status' => self::STATUS_VISIBLE]);
+
+        $countProducts = $query->count();
+        $pages = new Pagination(['totalCount' => $countProducts, 'pageSize' => self::SHOW_LIMIT_PRODUCTS]);
+
+        $products = $query->offset($pages->offset)
+            ->limit($pages->limit)
+            ->all();
+
+        $data['subcategoryProducts'] = $products;
         $data['pages'] = $pages;
 
         return $data;

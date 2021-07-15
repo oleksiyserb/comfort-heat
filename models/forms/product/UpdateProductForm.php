@@ -43,8 +43,9 @@ class UpdateProductForm extends Model
     public function rules()
     {
         return [
+            [['price'], 'integer', 'length' => [1, 10]],
             [['title', 'price', 'subcategoryId', 'status'], 'required'],
-            [['price', 'subcategoryId', 'status', 'time_update'], 'integer'],
+            [['subcategoryId', 'status', 'time_update'], 'integer'],
             [['title', 'model', 'maker'], 'string', 'max' => 255],
             [['description', 'characteristic'], 'string']
         ];

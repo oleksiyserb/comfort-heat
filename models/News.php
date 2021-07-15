@@ -58,4 +58,9 @@ class News extends \yii\db\ActiveRecord
 
         return $data;
     }
+
+    public static function getNews()
+    {
+        return News::find()->where(['status' => News::STATUS_SEE])->orderBy('id DESC')->all();
+    }
 }

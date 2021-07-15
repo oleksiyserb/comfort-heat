@@ -1,83 +1,45 @@
 <?php
 
+use app\components\Storage;
+use app\components\StringHelper;
+use yii\helpers\Url;
 
+/* @var $model \app\models\Subcategory */
+/* @var $categories \app\models\Category */
+/* @var $propositions \app\models\News */
+/* @var $products \app\models\Product */
+/* @var $pages \app\models\Product */
 
 ?>
 
 <div class="container container__wrapper">
     <!-- Aside -->
     <aside class="category">
-        <div class="category__item">
-            <a href="#" class="dropdown-btn">Тепла підлога</a>
-            <ul>
-                <li><a href="subcategory.html">Сніготанення вуличних майданчиків</a></li>
-                <li><a href="subcategory.html">Обігрів водостічної системи</a></li>
-                <li><a href="subcategory.html">Захист труб від замерзання</a></li>
-            </ul>
-        </div>
-        <div class="category__item">
-            <a href="#" class="dropdown-btn">Опалення</a>
-            <ul>
-                <li><a href="subcategory.html">Сніготанення вуличних майданчиків</a></li>
-                <li><a href="subcategory.html">Обігрів водостічної системи</a></li>
-                <li><a href="subcategory.html">Захист труб від замерзання</a></li>
-            </ul>
-        </div>
-        <div class="category__item">
-            <a href="#" class="dropdown-btn visited">Вуличні системи</a>
-            <ul>
-                <li><a href="subcategory.html">Сніготанення вуличних майданчиків</a></li>
-                <li class="active"><a href="subcategory.html">Обігрів водостічної системи</a></li>
-                <li><a href="subcategory.html">Захист труб від замерзання</a></li>
-            </ul>
-        </div>
-        <div class="category__item">
-            <a href="#" class="dropdown-btn">Технологічний обігрів</a>
-            <ul>
-                <li><a href="subcategory.html">Сніготанення вуличних майданчиків</a></li>
-                <li><a href="subcategory.html">Обігрів водостічної системи</a></li>
-                <li><a href="subcategory.html">Захист труб від замерзання</a></li>
-            </ul>
-        </div>
-        <div class="category__item">
-            <a href="#" class="dropdown-btn">Нагрівальні мати</a>
-            <ul>
-                <li><a href="subcategory.html">Сніготанення вуличних майданчиків</a></li>
-                <li><a href="subcategory.html">Обігрів водостічної системи</a></li>
-                <li><a href="subcategory.html">Захист труб від замерзання</a></li>
-            </ul>
-        </div>
-        <div class="category__item">
-            <a href="#" class="dropdown-btn">Нагрівальні кабелі</a>
-            <ul>
-                <li><a href="subcategory.html">Сніготанення вуличних майданчиків</a></li>
-                <li><a href="subcategory.html">Обігрів водостічної системи</a></li>
-                <li><a href="subcategory.html">Захист труб від замерзання</a></li>
-            </ul>
-        </div>
-        <div class="category__item">
-            <a href="#" class="dropdown-btn">Терморегулятори</a>
-            <ul>
-                <li><a href="subcategory.html">Сніготанення вуличних майданчиків</a></li>
-                <li><a href="subcategory.html">Обігрів водостічної системи</a></li>
-                <li><a href="subcategory.html">Захист труб від замерзання</a></li>
-            </ul>
-        </div>
-        <div class="category__item">
-            <a href="#" class="dropdown-btn">Додаткове обладнання</a>
-            <ul>
-                <li><a href="subcategory.html">Сніготанення вуличних майданчиків</a></li>
-                <li><a href="subcategory.html">Обігрів водостічної системи</a></li>
-                <li><a href="subcategory.html">Захист труб від замерзання</a></li>
-            </ul>
-        </div>
+
+
+        <?php foreach ($categories as $category): ?>
+            <div class="category__item">
+                <a href="#" class="dropdown-btn <?php if ($model->category_id == $category->id) { echo 'visited'; } ?>"><?= $category->title; ?></a>
+                <ul>
+
+                    <?php foreach ($category->subcategories as $subcategory): ?>
+                        <li class="<?php if ($subcategory->id == $model->id) { echo 'active'; } ?>">
+                            <a href="<?= Url::to(['subcategory', 'id' => $subcategory->id]) ?>"><?= $subcategory->title; ?></a>
+                        </li>
+                    <?php endforeach; ?>
+
+                </ul>
+            </div>
+        <?php endforeach; ?>
+
+
     </aside>
 
     <main class="product-information">
         <!-- Subcategory -->
         <section class="subcategory">
-            <h2 class="title">Обігрів водостічної системи</h2>
-            <p>Обігрів водостічної системи - електрична кабельна система захисту від замерзання елементів покрівлі, жолобів і водостоків, основним завданням якої є забезпечення стоку талої води з даху на землю або в дренажний колодязь. Реалізовується за допомогою установки спеціального нагрівального кабелю в необхідні покрівельні елементи з автоматичним регулятором по температурі повітря або по температурі і вологості. Останній спосіб регулювання набагато ефективніший і економічніший, так як нагрівальні елементи включаються тільки за наявності морозу і вологи, яка може замерзнути.</p>
+            <h2 class="title"><?= $model->title; ?></h2>
+            <p><?= $model->text; ?></p>
         </section>
 
         <!-- Result-->
@@ -122,110 +84,45 @@
                         </svg>
                     </a>
                 </div>
-                <div class="result__navigation">
-                    <span>На сторінці</span>
-                    <select id="navigation">
-                        <option value="">15</option>
-                        <option value="">14</option>
-                        <option value="">13</option>
-                        <option value="">12</option>
-                        <option value="">11</option>
-                        <option value="">10</option>
-                    </select>
-                </div>
             </div>
             <div class="result__wrapper">
-                <a href="product.html" class="result__product-card">
-                    <img src="/public/image/product-image.png" alt="product-image">
+
+                <?php foreach ($products as $product): ?>
+                <a href="<?= Url::to(['product', 'id' => $product->id]); ?>" class="result__product-card">
+                    <img src="<?= Storage::getPicture($product->picture[0]->mini); ?>" alt="product-image">
                     <div class="result__description">
-                        <h4>Нагрівальний кабель CTAСV-20 160W 8м</h4>
-                        <span>2193 ₴</span>
-                        <p>Двожильний нагрівальний кабель CTACV-20 потужністю 20 Вт/м застосовується для...</p>
+                        <h4><?= StringHelper::getShortTitle($product->title); ?></h4>
+                        <span><?= $product->price; ?> ₴</span>
+                        <p><?= StringHelper::getShortDescription($product->description); ?></p>
                     </div>
                 </a>
-                <a href="product.html" class="result__product-card">
-                    <img src="/public/image/product-image.png" alt="product-image">
-                    <div class="result__description">
-                        <h4>Нагрівальний кабель CTAСV-20 160W 8м</h4>
-                        <span>2193 ₴</span>
-                        <p>Двожильний нагрівальний кабель CTACV-20 потужністю 20 Вт/м застосовується для...</p>
-                    </div>
-                </a>
-                <a href="product.html" class="result__product-card">
-                    <img src="/public/image/product-image.png" alt="product-image">
-                    <div class="result__description">
-                        <h4>Нагрівальний кабель CTAСV-20 160W 8м</h4>
-                        <span>2193 ₴</span>
-                        <p>Двожильний нагрівальний кабель CTACV-20 потужністю 20 Вт/м застосовується для...</p>
-                    </div>
-                </a>
-                <a href="product.html" class="result__product-card">
-                    <img src="/public/image/product-image.png" alt="product-image">
-                    <div class="result__description">
-                        <h4>Нагрівальний кабель CTAСV-20 160W 8м</h4>
-                        <span>2193 ₴</span>
-                        <p>Двожильний нагрівальний кабель CTACV-20 потужністю 20 Вт/м застосовується для...</p>
-                    </div>
-                </a>
-                <a href="product.html" class="result__product-card">
-                    <img src="/public/image/product-image.png" alt="product-image">
-                    <div class="result__description">
-                        <h4>Нагрівальний кабель CTAСV-20 160W 8м</h4>
-                        <span>2193 ₴</span>
-                        <p>Двожильний нагрівальний кабель CTACV-20 потужністю 20 Вт/м застосовується для...</p>
-                    </div>
-                </a>
-                <a href="product.html" class="result__product-card">
-                    <img src="/public/image/product-image.png" alt="product-image">
-                    <div class="result__description">
-                        <h4>Нагрівальний кабель CTAСV-20 160W 8м</h4>
-                        <span>2193 ₴</span>
-                        <p>Двожильний нагрівальний кабель CTACV-20 потужністю 20 Вт/м застосовується для...</p>
-                    </div>
-                </a>
-                <a href="product.html" class="result__product-card">
-                    <img src="/public/image/product-image.png" alt="product-image">
-                    <div class="result__description">
-                        <h4>Нагрівальний кабель CTAСV-20 160W 8м</h4>
-                        <span>2193 ₴</span>
-                        <p>Двожильний нагрівальний кабель CTACV-20 потужністю 20 Вт/м застосовується для...</p>
-                    </div>
-                </a>
-                <a href="product.html" class="result__product-card">
-                    <img src="/public/image/product-image.png" alt="product-image">
-                    <div class="result__description">
-                        <h4>Нагрівальний кабель CTAСV-20 160W 8м</h4>
-                        <span>2193 ₴</span>
-                        <p>Двожильний нагрівальний кабель CTACV-20 потужністю 20 Вт/м застосовується для...</p>
-                    </div>
-                </a>
+                <?php endforeach; ?>
+
             </div>
-            <div class="result__page">
-                <p>Показано 8 із 8 (всього 1 сторінок)</p>
+            <div class="pagination__wrap">
+                <?= \yii\widgets\LinkPager::widget([
+                    'pagination' => $pages,
+                ]) ?>
             </div>
         </section>
     </main>
 </div>
 
 <!-- Propositions -->
-<section class="propositions">
+<section class="propositions category-propositions">
     <div class="container">
-        <h4 class="title">Пов’язані статті</h4>
         <div class="info">
-            <div class="info__item">
-                <h3>Title</h3>
-                <p>Description</p>
-                <div class="info__button propositions__button">
-                    <a href="#">Читати<img src="/public/image/arrow-down.svg" alt="arrow"></a>
+
+            <?php foreach ($propositions as $article): ?>
+                <div class="info__item">
+                    <h3><?= StringHelper::getShortTitle($article->title); ?></h3>
+                    <p><?= StringHelper::getShortDescription($article->description); ?></p>
+                    <div class="info__button propositions__button">
+                        <a href="<?= Url::to(['news/view', 'id' => $article->id]); ?>">Детальніше<img src="/public/image/arrow-down.svg" alt="arrow"></a>
+                    </div>
                 </div>
-            </div>
-            <div class="info__item">
-                <h3>Title</h3>
-                <p>Description</p>
-                <div class="info__button propositions__button">
-                    <a href="#">Читати<img src="/public/image/arrow-down.svg" alt="arrow"></a>
-                </div>
-            </div>
+            <?php endforeach; ?>
+
         </div>
     </div>
 </section>

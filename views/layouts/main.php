@@ -2,12 +2,16 @@
 
 /* @var $this \yii\web\View */
 /* @var $content string */
+/* @var $categories Category */
 
+use app\models\Category;
 use yii\helpers\Html;
 use app\assets\PublicAsset;
 use yii\helpers\Url;
 
 PublicAsset::register($this);
+
+$categories = Category::find()->with('subcategories')->all();
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -38,69 +42,31 @@ PublicAsset::register($this);
             </div>
             <div class="catalog-modal__body">
                 <div class="catalog-modal__left">
+
+                    <?php foreach ($categories as $category): ?>
                     <ul class="catalog-modal__item">
                         <a class="catalog-modal__first-button" href="#">
-                            Тепла підлога<img src="/public/image/arrow-down-orange.svg" alt="arrow">
+                            <?= $category->title; ?><img src="/public/image/arrow-down-orange.svg" alt="arrow">
                         </a>
-                        <li><a href="#">Під плитку</a></li>
-                        <li><a href="#">В стяжку</a></li>
-                        <li><a href="#">Під ламінат</a></li>
+
+                        <?php if ($category->subcategories): ?>
+                            <?php foreach ($category->subcategories as $subcategory): ?>
+                                <li><a href="<?= Url::to(['catalog/subcategory', 'id' => $subcategory->id]) ?>"><?= $subcategory->title; ?></a></li>
+                            <?php endforeach; ?>
+                        <?php endif; ?>
+
                     </ul>
-                    <ul class="catalog-modal__item">
-                        <a class="catalog-modal__first-button" href="#">
-                            Опалення<img src="/public/image/arrow-down-orange.svg" alt="arrow">
-                        </a>
-                        <li><a href="#">Сніготанення вуличних майданчиків</a></li>
-                        <li><a href="#">Обігрів водостічної системи</a></li>
-                        <li><a href="#">Захист труб від замерзання</a></li>
-                    </ul>
-                    <ul class="catalog-modal__item">
-                        <a class="catalog-modal__first-button" href="#">
-                            Вуличні системи<img src="/public/image/arrow-down-orange.svg" alt="arrow">
-                        </a>
-                        <li><a href="#">Обігрів водостічної системи</a></li>
-                        <li><a href="#">Захист труб від замерзання</a></li>
-                    </ul>
-                    <ul class="catalog-modal__item">
-                        <a class="catalog-modal__first-button" href="#">
-                            Технологічний обігрів<img src="/public/image/arrow-down-orange.svg" alt="arrow">
-                        </a>
-                        <li><a href="#">В стяжку</a></li>
-                    </ul>
-                    <ul class="catalog-modal__item">
-                        <a class="catalog-modal__first-button" href="#">
-                            Нагрівальні мати<img src="/public/image/arrow-down-orange.svg" alt="arrow">
-                        </a>
-                        <li><a href="#">Під плитку</a></li>
-                        <li><a href="#">В стяжку</a></li>
-                    </ul>
-                    <ul class="catalog-modal__item">
-                        <a class="catalog-modal__first-button" href="#">
-                            Нагрівальні кабелі<img src="/public/image/arrow-down-orange.svg" alt="arrow">
-                        </a>
-                        <li><a href="#">Обігрів водостічної системи</a></li>
-                        <li><a href="#">Захист труб від замерзання</a></li>
-                    </ul>
-                    <ul class="catalog-modal__item">
-                        <a class="catalog-modal__first-button" href="#">
-                            Додаткове обладнання<img src="/public/image/arrow-down-orange.svg" alt="arrow">
-                        </a>
-                        <li><a href="#">Обігрів водостічної системи</a></li>
-                        <li><a href="#">Захист труб від замерзання</a></li>
-                    </ul>
-                    <ul class="catalog-modal__item">
-                        <a class="catalog-modal__first-button" href="#">
-                            Терморегулятори<img src="/public/image/arrow-down-orange.svg" alt="arrow">
-                        </a>
-                        <li><a href="#">Сніготанення вуличних майданчиків</a></li>
-                        <li><a href="#">Обігрів водостічної системи</a></li>
-                        <li><a href="#">Захист труб від замерзання</a></li>
-                    </ul>
+                    <?php endforeach; ?>
+
                 </div>
                 <div class="catalog-modal__right">
-                    <a href="category.html">Сніготанення вуличних майданчиків</a>
-                    <a href="category.html">Обігрів водостічної системи</a>
-                    <a href="category.html">Захист труб від замерзання</a>
+
+                    <?php foreach ($categories as $category): ?>
+                        <?php foreach ($category->subcategories as $subcategory): ?>
+                        <a href="<?= Url::to(['catalog/subcategory', 'id' => $subcategory->id]); ?>"><?= $subcategory->title; ?></a>
+                        <?php endforeach; ?>
+                    <?php endforeach; ?>
+
                 </div>
             </div>
         </div>

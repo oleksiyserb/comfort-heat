@@ -32,7 +32,7 @@ use yii\helpers\Url;
                 комфорта и безопасности при низком энергопотреблении и минимальных затратах на техническое
                 обслуживание.</p>
             <div class="info__button company__button margin--left">
-                <a href="#">Більше про компанію<img src="/public/image/arrow-down-light.svg" alt="arrow"></a>
+                <a href="<?= Url::to(['about']) ?>">Більше про компанію<img src="/public/image/arrow-down-light.svg" alt="arrow"></a>
             </div>
         </div>
     </div>

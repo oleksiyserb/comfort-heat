@@ -24,11 +24,7 @@ class NewsController extends Controller
     public function actionView($id)
     {
         $article = $this->findModel($id);
-        $propositions = News::find()
-            ->where(['status' => News::STATUS_SEE])
-            ->orderBy('id DESC')
-            ->limit(News::LIMIT_PROPOSITIONS)
-            ->all();
+        $propositions = News::getPropositions();
 
         return $this->render('view', [
             'article' => $article,

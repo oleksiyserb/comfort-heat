@@ -30,10 +30,7 @@ class ProjectController extends Controller
     public function actionView($id)
     {
         $project = $this->findModel($id);
-        $propositions = Project::find()
-            ->where(['status' => Project::STATUS_SEE])
-            ->orderBy('id DESC')
-            ->limit(Project::LIMIT_PROPOSITION_PROJECTS)->all();
+        $propositions = Project::getPropositions();
 
         return $this->render('view', [
             'project' => $project,

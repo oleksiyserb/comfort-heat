@@ -59,8 +59,23 @@ class News extends \yii\db\ActiveRecord
         return $data;
     }
 
+    /**
+     * @return array|\yii\db\ActiveRecord[]
+     */
     public static function getNews()
     {
         return News::find()->where(['status' => News::STATUS_SEE])->orderBy('id DESC')->all();
+    }
+
+    /**
+     * @return array|\yii\db\ActiveRecord[]
+     */
+    public static function getPropositions()
+    {
+        return News::find()
+            ->where(['status' => News::STATUS_SEE])
+            ->orderBy('id DESC')
+            ->limit(News::LIMIT_PROPOSITIONS)
+            ->all();
     }
 }

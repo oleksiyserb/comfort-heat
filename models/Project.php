@@ -58,4 +58,25 @@ class Project extends \yii\db\ActiveRecord
 
         return $data;
     }
+
+    /**
+     * @return array|\yii\db\ActiveRecord[]
+     */
+    public static function getAll()
+    {
+        return Project::find()
+            ->where(['status' => Project::STATUS_SEE])
+            ->orderBy('id DESC')
+            ->limit(Project::SHOW_LIMIT_PROJECT)
+            ->all();
+    }
+
+    public static function getPropositions()
+    {
+        return Project::find()
+            ->where(['status' => Project::STATUS_SEE])
+            ->orderBy('id DESC')
+            ->limit(Project::LIMIT_PROPOSITION_PROJECTS)
+            ->all();
+    }
 }

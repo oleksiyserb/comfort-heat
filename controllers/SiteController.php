@@ -60,7 +60,7 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $projects = Project::find()->orderBy('id DESC')->limit(self::SHOW_LIMIT_PROJECT)->all();
+        $projects = Project::getAll();
 
         return $this->render('index', [
             'projects' => $projects,

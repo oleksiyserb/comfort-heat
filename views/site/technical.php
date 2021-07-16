@@ -1,7 +1,10 @@
+<?php
+$this->title = 'Технічна інформація';
+?>
 <!-- Techincal -->
 <section class="technical">
     <div class="container">
-        <h1 class="title">Технічна інформація</h1>
+        <h1 class="title"><?= $this->title; ?></h1>
         <div class="technical__documents">
             <a class="technical__file" href="/files/java-dog.pdf">
                 <p>Схемы подключения выключателей и электронных механизмов (4.53 Мб)</p>

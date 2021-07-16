@@ -69,20 +69,3 @@ description.onclick = (e) => {
 	descriptionText.style.display = "block";
 	technicalText.style.display = "none";
 }
-
-// ----------------------------------------Slider Swiper----------------------------------------------------------------
-
-new Swiper('.modal__slider-container', {
-	// Arrows
-	navigation: {
-		nextEl: '.modal__slider-next',
-		prevEl: '.modal__slider-prev'
-	},
-
-	// Pagination
-	pagination: {
-		el: '.swiper-pagination',
-
-		type: 'fraction',
-	},
-});

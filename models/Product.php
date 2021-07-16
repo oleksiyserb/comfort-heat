@@ -27,6 +27,7 @@ class Product extends \yii\db\ActiveRecord
     const STATUS_VISIBLE = 1;
     const STATUS_UNVISIBLE = 0;
     const SHOW_LIMIT_PRODUCTS = 8;
+    const LIMIT_SUBCATEGORY_PRODUCTS = 4;
     /**
      * {@inheritdoc}
      */
@@ -115,5 +116,14 @@ class Product extends \yii\db\ActiveRecord
         $data['pages'] = $pages;
 
         return $data;
+    }
+
+    public static function getAllProductsCurrentSubcategory($id)
+    {
+        return Product::find()
+            ->where(['subcategory_id' => $id, 'status' => Product::STATUS_VISIBLE])
+            ->orderBy('id DESC')
+            ->limit(Product::LIMIT_SUBCATEGORY_PRODUCTS)
+            ->all();
     }
 }

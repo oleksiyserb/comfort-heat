@@ -6,6 +6,7 @@ namespace app\controllers;
 
 use app\models\Category;
 use app\models\News;
+use app\models\Picture;
 use app\models\Product;
 use app\models\Subcategory;
 use yii\web\Controller;
@@ -22,8 +23,8 @@ class CatalogController extends Controller
         $propositions = News::getNews();
 
         return $this->render('category', [
-            'categories' => $categories,
             'model' => $model,
+            'categories' => $categories,
             'products' => $data['products'],
             'pages' => $data['pages'],
             'propositions' => $propositions
@@ -38,8 +39,8 @@ class CatalogController extends Controller
         $data = Product::getSubcategoryProducts($id);
 
          return $this->render('subcategory', [
-             'categories' => $categories,
              'model' => $model,
+             'categories' => $categories,
              'propositions' => $propositions,
              'products' => $data['subcategoryProducts'],
              'pages' => $data['pages']
@@ -48,7 +49,13 @@ class CatalogController extends Controller
 
     public function actionProduct($id)
     {
-        return $this->render('product');
+        $model = $this->findModelProduct($id);
+        $products = Product::getAllProductsCurrentSubcategory($model->subcategory->id);
+
+        return $this->render('product', [
+            'model' => $model,
+            'products' => $products
+        ]);
     }
 
     /**
@@ -79,4 +86,17 @@ class CatalogController extends Controller
         throw new NotFoundHttpException('The requested page does not exist.');
     }
 
+    /**
+     * @param $id
+     * @return Product|null
+     * @throws NotFoundHttpException
+     */
+    protected function findModelProduct($id)
+    {
+        if (($model = Product::findOne($id)) !== null) {
+            return $model;
+        }
+
+        throw new NotFoundHttpException('The requested page does not exist.');
+    }
 }

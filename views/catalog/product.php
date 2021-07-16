@@ -1,9 +1,29 @@
 <?php
 
+use app\assets\ProductAsset;
+use app\components\Storage;
+use app\components\StringHelper;
+use yii\helpers\Url;
+use yii\widgets\Breadcrumbs;
 
+/* @var $model \app\models\Product */
+/* @var $products \app\models\Product */
+
+ProductAsset::register($this);
+
+$this->title = 'Продукт: ' . $model->title;
+
+$this->params['breadcrumbs'][] = [
+    'template' => "<li><b>{link}</b></li> > ",
+    'label' => $model->subcategory->title,
+    'url' => ['subcategory', 'id' => $model->subcategory->id]
+];
+
+$this->params['breadcrumbs'][] = $this->title;
 
 ?>
 
+<?php if ($model->picture): ?>
 <!-- Modal -->
 <div class="modal" id="modal-product">
     <div class="modal__product-block">
@@ -12,16 +32,15 @@
         </a>
         <div class="modal__slider-container swiper-container">
             <div class="modal__slider-wrapper swiper-wrapper">
+
+                <?php foreach ($model->picture as $picture): ?>
                 <div class="modal__slider-slide swiper-slide">
                     <div class="modal__image">
-                        <img src="/public/image/product-image.png" alt="product-image">
+                        <img src="<?= Storage::getPicture($picture->picture); ?>" alt="product-image">
                     </div>
                 </div>
-                <div class="modal__slider-slide swiper-slide">
-                    <div class="modal__image">
-                        <img src="/public/image/product-image.png" alt="product-image">
-                    </div>
-                </div>
+                <?php endforeach; ?>
+
             </div>
 
             <!-- Navigation buttons -->
@@ -41,43 +60,54 @@
             <!-- Pagination -->
             <div class="swiper-pagination"></div>
         </div>
-        <p>Нагрівальний кабель CTAСV-30 195W 7м</p>
+        <p><?= $model->title; ?></p>
     </div>
 </div>
 <!-- Modal end -->
+<?php endif; ?>
 
 <!-- Product -->
 <section class="product">
     <div class="container">
-        <div class="breadcrumbs">
-            <a href="category.html">Нагрівальні кабелі</a> > <a href="subcategory.html">Для відкритої установки</a>
-            > <p>Нагрівальний кабель CTAСV-30 195W 7м</p>
-        </div>
+        <?php echo Breadcrumbs::widget([
+            'homeLink' => false,
+            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : []
+        ]); ?>
         <div class="product__body">
             <div class="product__view">
                 <div class="product__wrapper">
                     <a href="#" class="product__image" id="static-image">
-                        <img src="/public/image/product-image.png" alt="product-image">
+                        <img src="<?= Storage::getPicture($model->picture[0]->picture); ?>" alt="product-image">
                     </a>
                 </div>
                 <div class="product__mini-wrapper">
-                    <div class="product__mini-image dynamic-image">
-                        <img src="/public/image/product-image.png" alt="mini-image">
-                    </div>
-                    <div class="product__mini-image dynamic-image">
-                        <img src="/public/image/office.png" alt="mini-image">
-                    </div>
+
+                    <?php if ($model->picture): ?>
+                        <?php foreach ($model->picture as $picture): ?>
+                        <div class="product__mini-image dynamic-image">
+                            <img src="<?= Storage::getPicture($picture->picture); ?>" alt="mini-image">
+                        </div>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
+
                 </div>
             </div>
             <div class="product__info">
                 <div class="product__top">
-                    <h2 class="title product__title">Нагрівальний кабель CTAСV-30 195W 7м</h2>
-                    <h2>2193 ₴</h2>
+                    <h2 class="title product__title"><?= $model->title; ?></h2>
+                    <h2><?= $model->price; ?> ₴</h2>
                 </div>
                 <div class="product__bottom">
-                    <p>Модель: CTACV-30</p>
-                    <p>Виробник: Comfort Heat</p>
-                    <span class="product__availability">В наявності</span>
+                    <p>Модель: <?= $model->model; ?></p>
+                    <p>Виробник: <?= $model->price; ?></p>
+                    <span class="product__availability">
+                        <?php if ($model->status == 1) {
+                            echo 'В наявності';
+                        } else {
+                            echo 'Немає';
+                        }
+                        ?>
+                    </span>
                 </div>
             </div>
         </div>
@@ -87,11 +117,10 @@
                 <a id="technical" href="#">Технічні характеристики</a>
             </div>
             <div class="product__text">
-                <p>У зимовий період мороз, сніг і лід може наробити чимало неприємностей. Всі дорожні елементи стають слизькими і непристосованими для безпечного пересування пішоходів і транспорту. Елементи покрівлі та водостічної системи обростають бурульками, які загрожують здоров'ю і життю людей, а також руйнують елементи будівель. Замерзають зовнішні трубопроводи, водостічні та дренажні системи, що призводить до аварійного режиму їх роботи. Для профілактики від подібних неприємностей існує сучасний ефективний спосіб - вуличні системи обігріву: сніготанення зовнішніх майданчиків, обігрів водостічної системи і захист труб від замерзання</p>
+                <p><?= $model->description; ?></p>
             </div>
             <div class="product__technical">
-                <p>Двожильний нагрівальний кабель CTACV-30 потужністю 30 Вт/м застосовується для обігріву елементів покрівлі, жолобів, водостоків, водоприймальних воронок для забезпечення стоку талої води в зимовий період, а також для захисту від намерзання снігу та льоду на вуличних майданчиках (балконах, терасах, сходах, тротуарних доріжках, пандусах, під'їздних шляхах, мостах та ін.).
-                    Нагрівальний кабель CTACV-30 має подвійну посилену ізоляцію (клас М2), екранований алюмінієвою фольгою та лудженою міддю (з функцією пам'яті), з фторполімерною ізоляцією провідників і зовнішньою поліпропіленовою оболонкою. Зовнішня ізоляція стійка до ультрафіолетового випромінювання.</p>
+                <p><?= $model->characteristic; ?></p>
             </div>
         </div>
     </div>
@@ -102,34 +131,17 @@
     <div class="container">
         <h3 class="title">Товари категорії</h3>
         <div class="result__wrapper product-category__wrapper">
-            <a href="product.html" class="result__product-card">
-                <img src="/public/image/product-image.png" alt="product-image">
+
+            <?php foreach ($products as $product): ?>
+            <a href="<?= Url::to(['product', 'id' => $product->id]); ?>" class="result__product-card">
+                <img src="<?= Storage::getPicture($product->picture[0]->mini); ?>" alt="product-image">
                 <div class="result__description">
-                    <h4>Нагрівальний кабель CTAСV-20 160W 8м</h4>
-                    <p>Двожильний нагрівальний кабель CTACV-20 потужністю 20 Вт/м застосовується для...</p>
+                    <h4><?= StringHelper::getShortTitle($product->title); ?></h4>
+                    <p><?= StringHelper::getShortDescription($product->description); ?></p>
                 </div>
             </a>
-            <a href="product.html" class="result__product-card">
-                <img src="/public/image/product-image.png" alt="product-image">
-                <div class="result__description">
-                    <h4>Нагрівальний кабель CTAСV-20 160W 8м</h4>
-                    <p>Двожильний нагрівальний кабель CTACV-20 потужністю 20 Вт/м застосовується для...</p>
-                </div>
-            </a>
-            <a href="product.html" class="result__product-card">
-                <img src="/public/image/product-image.png" alt="product-image">
-                <div class="result__description">
-                    <h4>Нагрівальний кабель CTAСV-20 160W 8м</h4>
-                    <p>Двожильний нагрівальний кабель CTACV-20 потужністю 20 Вт/м застосовується для...</p>
-                </div>
-            </a>
-            <a href="product.html" class="result__product-card">
-                <img src="/public/image/product-image.png" alt="product-image">
-                <div class="result__description">
-                    <h4>Нагрівальний кабель CTAСV-20 160W 8м</h4>
-                    <p>Двожильний нагрівальний кабель CTACV-20 потужністю 20 Вт/м застосовується для...</p>
-                </div>
-            </a>
+            <?php endforeach; ?>
+
         </div>
     </div>
 </section>

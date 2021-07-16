@@ -1,8 +1,11 @@
+<?php
+$this->title = 'Компанія';
+?>
 <!-- Company hero -->
 <section class="company-hero">
     <div class="container">
         <div class="company-hero__title">
-            <h1>Компанія</h1>
+            <h1><?= $this->title; ?></h1>
         </div>
     </div>
 </section>

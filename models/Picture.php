@@ -71,4 +71,11 @@ class Picture extends \yii\db\ActiveRecord
             return '/no-image.png';
         }
     }
+
+    public static function getProductPictures($id)
+    {
+        return Picture::find()
+            ->where(['product_id' => $id])
+            ->all();
+    }
 }

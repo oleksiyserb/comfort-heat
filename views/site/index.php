@@ -5,6 +5,8 @@
 use app\components\StringHelper;
 use app\components\Storage;
 use yii\helpers\Url;
+
+$this->title = 'Головна';
 ?>
 <!-- Hero -->
 <section class="hero">

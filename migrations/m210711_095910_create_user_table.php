@@ -18,7 +18,7 @@ class m210711_095910_create_user_table extends Migration
             'email' => $this->string()->notNull()->unique(),
             'password' => $this->string()->notNull(),
             'access_token' => $this->string()->defaultValue(null),
-            'role' => $this->string()->defaultValue(null),
+            'isAdmin' => $this->integer(),
         ]);
     }
 

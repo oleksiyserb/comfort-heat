@@ -21,29 +21,27 @@ class Module extends \yii\base\Module
     /**
      * @return array
      */
-//    public function behaviors()
-//    {
-//        return [
-//            'access' => [
-//                'class' => AccessControl::className(),
-//                'denyCallback' => function($rule, $action)
-//                {
-//                    throw new NotFoundHttpException();
-//                },
-//                'rules' => [
-//                    [
-//                        'allow' => true,
-//                        'matchCallback' => function($rule, $action)
-//                        {
-//                            if (Yii::$app->user->role == 'admin') {
-//                                return Yii::$app->user->identity;
-//                            }
-//                        }
-//                    ]
-//                ]
-//            ]
-//        ];
-//    }
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'denyCallback' => function($rule, $action)
+                {
+                    throw new NotFoundHttpException();
+                },
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'matchCallback' => function($rule, $action)
+                        {
+                            return Yii::$app->user->identity->isAdmin;
+                        }
+                    ]
+                ]
+            ]
+        ];
+    }
 
     /**
      * {@inheritdoc}

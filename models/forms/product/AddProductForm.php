@@ -42,7 +42,7 @@ class AddProductForm extends Model
     public function rules()
     {
         return [
-            [['price'], 'integer', 'length' => [1, 10]],
+            [['price'], 'integer', 'max' => 1000000],
             [['title', 'price', 'subcategoryId', 'status'], 'required'],
             [['subcategoryId', 'status', 'time_create'], 'integer'],
             [['title', 'model', 'maker'], 'string', 'max' => 255],
